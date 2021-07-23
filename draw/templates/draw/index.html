@@ -1,0 +1,75 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>P4 Drawing</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'draw/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'draw/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'draw/vendor/paper/paper-full.min.js' %}"></script>
+
+    <style type="text/css">
+    </style>
+
+</head>
+
+<body>
+    <!-- You may change the dimensions of this canvas -->
+    <canvas id="myCanvas" width="750px" height="750px"></canvas>
+</body>
+<script>
+    // setting up the canvas and one paper tool
+    var canvas = document.getElementById('myCanvas');
+    paper.setup(canvas);
+    var tool = new paper.Tool();
+    var colorname = ["red", "yellow", "blue", "green", "purple", "black"];
+    var totalUsers = 6;
+    var uid = Math.floor(Math.random() * totalUsers)
+    var pathdic = {};
+
+    for (let uid = 0; uid < totalUsers; uid++) {
+        // create a path for each user
+        pathdic[uid] = new paper.Path();
+    }
+
+    // getting the URL (you may want to use for Exercise 3)
+    var url = window.location.href;
+    
+
+    var socket = new WebSocket(
+        'ws://' + window.location.host + '/ws/draw');
+
+    tool.onMouseMove = function(event) { //http://paperjs.org/reference/tool/ path examples
+        let path = pathdic[uid];
+        path.add(event.point)
+        path.strokeColor = colorname[uid];
+        path.strokeWidth = 5;
+        // You may need to add code here if you want to pass any other information.
+        socket.send("{\"x\" : " + event.point.x + ", \"y\" : " + event.point.y + ", \"uid\" : " + uid + "}");
+    }
+
+    socket.onmessage = function(receivedMessage) {
+        var received = JSON.parse(receivedMessage.data);
+        // console.log("Received: " + JSON.stringify(received));
+
+        // You will probably want to add some code here to draw more lines.
+        if (url.endsWith("large")) {
+            if (received.uid != uid) {
+            let path = pathdic[received.uid];
+            path.add(received)
+            path.strokeColor = colorname[received.uid];
+            path.strokeWidth = 5;
+        }
+        }
+
+    }
+
+    socket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+</script>
+
+</html>

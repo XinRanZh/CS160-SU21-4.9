@@ -2,11 +2,90 @@
 
 <!DOCTYPE html>
 <html>
+<style>
+.MainFrame { 
+    overflow:hidden;
+	background-color:rgba(41.54374837875366, 54.251243099570274, 73.31249848008156, 1);
+	width:375px;
+	height:812px;
+	position:absolute;
+}
+.Tag { 
+	background-color:rgba(84.78748753666878, 74.3749974668026, 148.7499949336052, 1);
+	width:375px;
+	height:78px;
+	position:absolute;
+	left:-1px;
+	top:0px;
+}
+.TagText { 
+	color:rgba(227.00000166893005, 146.00000649690628, 19.0000007674098, 1);
+	width:375px;
+	height:78px;
+	position:absolute;
+	left:-1px;
+	top:8px;
+	font-family:Salsa;
+	text-align:center;
+	font-size:30px;
+	letter-spacing:0;
+	line-height:px;
+}
+.NameInput{
+    color: rgba(227.00000166893005, 146.00000649690628, 19.0000007674098, 1);
+	width:327px;
+	height:25px;
+	position:absolute;
+	left:25px;
+	top:86px;
+}
+.TimeInput{
+    color: rgba(227.00000166893005, 146.00000649690628, 19.0000007674098, 1);
+	width:327px;
+	height:25px;
+	position:absolute;
+	left:25px;
+	top:121px;
+}
+.AddButton { 
+	background-color:rgba(227.00000166893005, 146.00000649690628, 19.0000007674098, 1);
+	width:93px;
+	height:30px;
+	position:absolute;
+	left:270px;
+	top:121px;
+	border-top-left-radius:15px;
+	border-top-right-radius:15px;
+	border-bottom-left-radius:15px;
+	border-bottom-right-radius:15px;
+}
+.MainList { 
+	background-color:rgba(196.00000351667404, 196.00000351667404, 196.00000351667404, 1);
+	width:327px;
+	height:550px;
+	position:absolute;
+	left:25px;
+	top:156px;
+}
+.PushButton { 
+	background-color:rgba(227.00000166893005, 146.00000649690628, 19.0000007674098, 1);
+	width:93px;
+	height:47px;
+	position:absolute;
+	left:142px;
+	top:730px;
+	border-top-left-radius:25px;
+	border-top-right-radius:25px;
+	border-bottom-left-radius:25px;
+	border-bottom-right-radius:25px;
+}
+    </style>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>P4 Drawing</title>
-
+    
+    <link href="https://fonts.googleapis.com/css?family=Salsa&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'draw/vendor/bootstrap/css/bootstrap.min.css' %}">
     <script type="text/javascript" src="{% static 'draw/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'draw/vendor/paper/paper-full.min.js' %}"></script>
@@ -19,11 +98,18 @@
 <body>
     <!-- You may change the dimensions of this canvas -->
     <!-- <canvas id="myCanvas" width="750px" height="750px"></canvas> -->
-        Task Name: <input type="text" id="Name" />
-        Task Time: <input type="date" id="Time" />
-        <button id="Add">Add</button>
-    <table id="todoList" cellpadding = '5'> </table>
-    <button id="Push">Push</button>
+
+    <div class=MainFrame>
+        <div class = "NameInput">Task Name: <input type="text" id="Name" /></div>
+        <div class = "TimeInput">Task Time: <input type="date" id="Time" /></div>
+        <button class = "AddButton" id="Add">Add</button>
+        <div class="Tag"></div><span  class="TagText">Your Schedule</span>
+        <table class = "MainList" id="todoList" cellpadding = '5'> </table>
+        <button id="Push" class="PushButton">Push</button>
+    </div>
+
+    <!-- <table id="todoList" cellpadding = '5'> </table>
+    <button id="Push">Push</button> -->
 </body>
 <script>
     // setting up the canvas and one paper tool

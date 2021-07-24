@@ -25,13 +25,21 @@
         <div class="inputDiv">
             <input type="text" value="Enter Task" id="Name" autocomplete="off" />
             <input type="date" id="Date" autocomplete="off" />
+            <select id = "Task" autocomplete="off">
+                <option value ="test">Test</option>
+                <option value ="review">Review</option>
+                <option value="develop">Develop</option>
+                <option value="design">Design</option>
+                <option value="deploy">Deploy</option>
+              </select>
         </div>
         <div id="taskDiv">
 
         </div>
         <div class="btnDiv">
-            <button class="btn" id="Add" style="font-size: 5vw; font-weight: 600; width: 50vw; color: white;">Add</button>
-            <button class="btn" id="Push" style="font-size: 5vw; font-weight: 600; width: 50vw; color: white;">Push</button>
+            <button class="btn" id="Add" style="font-size: 5vw; font-weight: 600; width: 33.33vw; color: white;">Add</button>
+            <button class="btn" id="Remove" style="font-size: 5vw; font-weight: 600; width: 33.33vw; color: white;">Remove</button>
+            <button class="btn" id="Push" style="font-size: 5vw; font-weight: 600; width: 33.33vw; color: white;">Push</button>
         </div>
 </body>
 <script type="text/javascript" src="{% static 'draw/script.js' %}"></script>

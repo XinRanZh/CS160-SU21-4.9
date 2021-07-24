@@ -1,6 +1,7 @@
   // simulate userDB; initialize users and randomly assign each user a name
   var uid = Math.floor(Math.random() * 5);
   var usernames = ["Emily", "John", "Ben", "Nia", "Stephanie", "Aisha"]
+  var listDataBase = {}
 
   var url = window.location.href;
   var socket = new WebSocket('ws://' + window.location.host + '/ws/draw');
@@ -22,14 +23,27 @@
   $("#Add").click(function() {
     var name = $("#Name").val()
     var date = $("#Date").val()
+    var task = $("#Task").val()
 
     if (name && date) {
       var tDiv = $(('<div>')).addClass("taskBar");
       tDiv.append(
         $(('<div>')).html(`<label for="${name}" id="taskName">${name}</label><label for="${date}">Deadline: ${date}</label>`).addClass("taskItem"),
-        $(('<div>')).html(`<input type="checkbox" value="${name};${date}">`).addClass("taskCheck")
+        $(('<div>')).html(`<input type="checkbox" value="${name};${date};${task}">`).addClass("taskCheck")
       )
       $('#taskDiv').append(tDiv);
+    }
+  })
+
+  $("#Remove").click(function() {
+    var checkboxes = $(":checkbox")
+    var selectedTasks = [];
+    for (var i = 0; i < checkboxes.length; i++) {
+      var item = checkboxes[i];
+      if (item.checked) {
+        item.parentNode.parentNode.parentNode.removeChild(item.parentNode.parentNode);
+
+      }
     }
   })
 
@@ -41,21 +55,38 @@
       if (item.checked) {
         var obj = {};
         obj.uid = uid;
+        console.log(item.value)
         obj.name = item.value.split(";")[0]
         obj.date = item.value.split(";")[1]
+        obj.kind = '#' + item.value.split(";")[2] + 'Tasks';
         selectedTasks.push(obj)
       }
     }
-    socket.send(JSON.stringify(selectedTasks))
+    var object = {}
+    object.uid = uid;
+    object.task = selectedTasks;
+    socket.send(JSON.stringify(object))
   })
 
   socket.onmessage = function(receivedMessage) {
     var received = JSON.parse(receivedMessage.data);
-
+    console.log(received)
     // bigScreen Data display
-    received.forEach(task => {
-      $('#testTasks').append($(('<div>')).html(`${task.name}<br>Deadline:<br>${task.date}<br>Posted by:${usernames[task.uid]}`).addClass("bigScreenTasks"));
+    uname = usernames[received.uid].toString();
+    listDataBase[uname] = received.task;
+    $('#testTasks').html("");
+    $('#developTasks').html("");
+    $('#designTasks').html("");
+    $('#deployTasks').html("");
+    $('#reviewTasks').html("");
+    Object.keys(listDataBase).forEach(function(key){
+      listDataBase[key].forEach(task => {
+        $(task.kind).append($(('<div>')).html(`${task.name}<br>Deadline:<br>${task.date}<br>Posted by:${usernames[task.uid]}`).addClass("bigScreenTasks"));
+      })
     })
+    // received.task.forEach(task => {  
+    //   $('#testTasks').append($(('<div>')).html(`${task.name}<br>Deadline:<br>${task.date}<br>Posted by:${usernames[task.uid]}`).addClass("bigScreenTasks"));
+    // })
   }
 
   socket.onclose = function(e) {

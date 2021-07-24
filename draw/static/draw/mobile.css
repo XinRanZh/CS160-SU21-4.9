@@ -79,6 +79,7 @@ label {
 }
 
 #Name {
+  margin-top: -3.5vh;
   width: 90vw;
   height: 5vh;
   margin-bottom: 2vh;
@@ -88,8 +89,17 @@ label {
 #Date {
   width: 90vw;
   height: 5vh;
+  margin-bottom: 2vh;
   color: rgb(104, 104, 104);
 }
+
+#Task {
+  width: 90vw;
+  height: 5vh;
+  margin-bottom: 2vh;
+  color: rgb(104, 104, 104);
+}
+
 
 .btn {
   border-radius: 0 !important;

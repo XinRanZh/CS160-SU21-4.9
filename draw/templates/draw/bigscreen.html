@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P4 Big Screen</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'draw/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'draw/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'draw/vendor/paper/paper-full.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'draw/mobile.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'draw/bigscreen.css' %}">
+    </link>
+</head>
+
+<body>
+    <div id="bigDisplay" class="big-container">
+        <div class="proj-stages" style="background-color: #5c4d7d;" id=" title-1">
+            <div class="stage-title">Design</div>
+            <div class="stage-text" id='designTasks'></div>
+        </div>
+        <div class="proj-stages" style="background-color: #9f86c0;" id="title-2">
+            <div class="stage-title">Develop</div>
+            <div class="stage-text" id='developTasks'></div>
+        </div>
+        <div class="proj-stages" style="background-color: #be95c4;" id="title-3">
+            <div class="stage-title">Test</div>
+            <div class="stage-text" id='testTasks'></div>
+        </div>
+        <div class="proj-stages" style="background-color: #e0b1cb;" id="title-4">
+            <div class="stage-title">Deploy</div>
+            <div class="stage-text" id='deployTasks'></div>
+        </div>
+        <div class="proj-stages" style="background-color: #ffd7ed;" id="title-5">
+            <div class="stage-title">Review</div>
+            <div class="stage-text" id='reviewTasks'></div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="{% static 'draw/script.js' %}"></script>
+
+
+</html>

@@ -4,104 +4,36 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>P4 Drawing</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P4 Mobile UI</title>
     <link rel="stylesheet" type="text/css" href="{% static 'draw/vendor/bootstrap/css/bootstrap.min.css' %}">
     <script type="text/javascript" src="{% static 'draw/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'draw/vendor/paper/paper-full.min.js' %}"></script>
-
-    <style type="text/css">
-    </style>
+    <link rel="stylesheet" href="{% static 'draw/mobile.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo&display=swap" rel="stylesheet">
+    </link>
 
 </head>
 
 <body>
-    <!-- You may change the dimensions of this canvas -->
-    <!-- <canvas id="myCanvas" width="750px" height="750px"></canvas> -->
-        Task Name: <input type="text" id="Name" />
-        Task Time: <input type="date" id="Time" />
-        <button id="Add">Add</button>
-    <table id="todoList" cellpadding = '5'> </table>
-    <button id="Push">Push</button>
+    <div id="todolist">
+        <div class="mobileTitle">
+            <p style="margin-bottom: 0;">Your Schedule</p>
+        </div>
+        <div class="inputDiv">
+            <input type="text" value="Enter Task" id="Name" autocomplete="off" />
+            <input type="date" id="Date" autocomplete="off" />
+        </div>
+        <div id="taskDiv">
+
+        </div>
+        <div class="btnDiv">
+            <button class="btn" id="Add" style="font-size: 5vw; font-weight: 600; width: 50vw; color: white;">Add</button>
+            <button class="btn" id="Push" style="font-size: 5vw; font-weight: 600; width: 50vw; color: white;">Push</button>
+        </div>
 </body>
-<script>
-    // setting up the canvas and one paper tool
-    var canvas = document.getElementById('myCanvas');
-    paper.setup(canvas);
-    var tool = new paper.Tool();
-    var colorname = ["red", "yellow", "blue", "green", "purple", "black"];
-    var totalUsers = 6;
-    var uid = Math.floor(Math.random() * totalUsers)
-    var pathdic = {};
-
-    for (let uid = 0; uid < totalUsers; uid++) {
-        // create a path for each user
-        pathdic[uid] = new paper.Path();
-    }
-
-    // getting the URL (you may want to use for Exercise 3)
-    var url = window.location.href;
-    
-
-    var socket = new WebSocket(
-        'ws://' + window.location.host + '/ws/draw');
-
-    // tool.onMouseMove = function(event) { //http://paperjs.org/reference/tool/ path examples
-    //     let path = pathdic[uid];
-    //     path.add(event.point)
-    //     path.strokeColor = colorname[uid];
-    //     path.strokeWidth = 5;
-    //     // You may need to add code here if you want to pass any other information.
-        // socket.send("{\"x\" : " + event.point.x + ", \"y\" : " + event.point.y + ", \"uid\" : " + uid + "}");
-    // }
-
-    $("#Add").click(function(){
-        var name = $("#Name").val()
-        var time = $("#Time").val()
-        // <input type="checkbox" name="vehicle" value="Bike">I have a bike<br>
-        console.log("<tr><td>" + name + "</td><td>" + time + "</td><tr>")
-        $("#todoList").append("<tr><td>" + name + "</td><td>" + time + "</td><td><input type=\"checkbox\"Finished</br></td>" + "</tr>" )
-    })
-    
-    $("#Push").click(function(){
-        var object = {}
-        object.uid = uid;
-        var list = {}
-        var id = 0
-        $("#todoList").find("tr").each(function(){
-            var tdArr = $(this).children();
-            var name = tdArr.eq(0).find('input').val();
-            var time = tdArr.eq(1).find('input').val();
-            var obj = {}
-            obj.name = name
-            obj.time = time
-            list[id.toString] = obj
-            id ++
-        });
-        id = 0
-        object.list = list;
-        socket.send(JSON.stringify(object));
-    })
-    socket.onmessage = function(receivedMessage) {
-        var received = JSON.parse(receivedMessage.data);
-        console.log(JSON.stringify(received.list));
-
-        // You will probably want to add some code here to draw more lines.
-        // if (url.endsWith("large")) {
-        //     if (received.uid != uid) {
-        //     let path = pathdic[received.uid];
-        //     path.add(received)
-        //     path.strokeColor = colorname[received.uid];
-        //     path.strokeWidth = 5;
-        // }
-        // }
-
-    }
-
-    socket.onclose = function(e) {
-        console.error('Chat socket closed unexpectedly');
-    };
-</script>
+<script type="text/javascript" src="{% static 'draw/script.js' %}"></script>
 
 </html>

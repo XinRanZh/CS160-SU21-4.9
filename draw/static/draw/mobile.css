@@ -1,0 +1,101 @@
+body {
+  background-color: #cabbda;
+}
+
+.mobileTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0%;
+  height: 15vh;
+  width: 100vw;
+  font-size: 10vw;
+  text-align: center;
+  font-family: 'Arvo', serif;
+  color: white;
+  background-color: #443850;
+  box-shadow: 0 0 3px 1px black;
+}
+
+.inputDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  width: 100vw;
+  top: 20%;
+}
+
+#taskDiv {
+  position: absolute;
+  top: 37%;
+  background-color: white;
+  height: 55vh;
+  width: 100vw;
+}
+
+.taskBar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #C0C5C1;
+  height: 10vh;
+  margin-bottom: 0.5vh;
+  box-shadow: 0 0 1px 3px darkgrey;
+}
+
+label {
+  margin: 0;
+}
+
+.taskItem {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100vw;
+  text-align: center;
+}
+
+#taskName {
+  font-size: 6vw;
+  font-weight: 800;
+  text-decoration: underline;
+}
+
+.taskCheck {
+  position: absolute;
+  right: 5vw;
+  display: flex;
+  align-self: center;
+}
+
+.btnDiv {
+  display: flex;
+  justify-content: center;;
+  position: absolute;
+  width: 100vw;
+  height: 10vh;
+  bottom: 0%;
+}
+
+#Name {
+  width: 90vw;
+  height: 5vh;
+  margin-bottom: 2vh;
+  color: rgb(104, 104, 104);
+}
+
+#Date {
+  width: 90vw;
+  height: 5vh;
+  color: rgb(104, 104, 104);
+}
+
+.btn {
+  border-radius: 0 !important;
+  background-color: #ad7c44;
+}
+
+input[type=checkbox] {
+    transform: scale(1.8);
+}

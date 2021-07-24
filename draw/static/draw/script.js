@@ -1,8 +1,6 @@
   // simulate userDB; initialize users and randomly assign each user a name
-  var uid = Date.now() % 10000;
+  var uid = Math.floor(Math.random() * 5);
   var usernames = ["Emily", "John", "Ben", "Nia", "Stephanie", "Aisha"]
-  var users = {}; // { id: username }
-  users[uid] = usernames[Math.floor(Math.random() * 5)];
 
   var url = window.location.href;
   var socket = new WebSocket('ws://' + window.location.host + '/ws/draw');
@@ -53,11 +51,10 @@
 
   socket.onmessage = function(receivedMessage) {
     var received = JSON.parse(receivedMessage.data);
-    // console.log(received);
 
     // bigScreen Data display
     received.forEach(task => {
-      $('#designTasks').append($(('<div>')).html(task.name).addClass("bigScreenTasks"));
+      $('#testTasks').append($(('<div>')).html(`${task.name}<br>Deadline:<br>${task.date}<br>Posted by:${usernames[task.uid]}`).addClass("bigScreenTasks"));
     })
   }
 

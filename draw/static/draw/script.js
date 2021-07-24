@@ -1,4 +1,3 @@
-  console.log("script is loaded!")
   // simulate userDB; initialize users and randomly assign each user a name
   var uid = Date.now() % 10000;
   var usernames = ["Emily", "John", "Ben", "Nia", "Stephanie", "Aisha"]

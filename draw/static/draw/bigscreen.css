@@ -48,9 +48,3 @@ html, body {
   font-weight: 800;
   font-size: 1.5vw;
 }
-
-@media only screen and (min-width: 900px) {
-  body {
-    background-color: lightblue;
-  }
-}

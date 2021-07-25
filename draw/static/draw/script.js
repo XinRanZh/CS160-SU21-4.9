@@ -2,6 +2,7 @@
   var uid = Math.floor(Math.random() * 5);
   var usernames = ["Emily", "John", "Ben", "Nia", "Stephanie", "Aisha"]
   var listDataBase = {}
+  var validater = {}
 
   var url = window.location.href;
   var socket = new WebSocket('ws://' + window.location.host + '/ws/draw');
@@ -37,7 +38,8 @@
     var date = $("#Date").val()
     var task = $("#Task").val()
 
-    if (name && date) {
+    if (name && date && ( validater[name] == undefined || (validater[name][0] !==date && validater[name][1] !==task))) {
+
       var tDiv = $(('<div>')).addClass("taskBar");
       tDiv.append(
         $(('<div>')).html(`<label for="${name}" id="taskName">${name}</label><label for="${date}">Deadline: ${date}</label>`).addClass("taskItem"),
@@ -45,6 +47,9 @@
       )
       tDiv.addClass("animate__animated animate__fadeIn animate__fast")
       $('#taskDiv').append(tDiv);
+      validater[name] = [date, task]
+    } else {
+      alert("You got duplicated task OR enpty name/date")
     }
   })
 
@@ -53,7 +58,8 @@
     var date = $("#Date2").val()
     var task = $("#Task2").val()
 
-    if (name && date) {
+    if (name && date && ( validater[name] == undefined || (validater[name][0] !==date && validater[name][1] !==task))) {
+
       var tDiv = $(('<div>')).addClass("taskBar");
       tDiv.append(
         $(('<div>')).html(`<label for="${name}" id="taskName">${name}</label><label for="${date}">Deadline: ${date}</label>`).addClass("taskItem"),
@@ -61,6 +67,9 @@
       )
       tDiv.addClass("animate__animated animate__fadeIn animate__fast")
       $('#taskDiv2').append(tDiv);
+      validater[name] = [date, task]
+    } else {
+      alert("You got duplicated task OR enpty name/date")
     }
   })
 

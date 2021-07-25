@@ -24,15 +24,18 @@ body {
   align-items: center;
   position: absolute;
   width: 100vw;
-  top: 20%;
+  top: 15%;
+  height: 26vh;
 }
 
 #taskDiv {
   position: absolute;
-  top: 37%;
+  top: 40.5%;
   background-color: white;
   height: 55vh;
   width: 100vw;
+  padding-top: 0.4vh;
+  overflow-y: auto;
 }
 
 .taskBar {
@@ -79,9 +82,9 @@ label {
 }
 
 #Name {
-  margin-top: -3.5vh;
   width: 90vw;
   height: 5vh;
+  margin-top: 3vh;
   margin-bottom: 2vh;
   color: rgb(104, 104, 104);
 }
@@ -108,4 +111,53 @@ label {
 
 input[type=checkbox] {
     transform: scale(1.8);
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* UI-2 */
+
+#Date2 {
+  width: 90vw;
+  height: 5vh;
+  margin-bottom: 2vh;
+  color: rgb(104, 104, 104);
+}
+
+#Name2 {
+  width: 90vw;
+  height: 5vh;
+  margin-bottom: 2vh;
+  color: rgb(104, 104, 104);
+}
+
+#Task2 {
+  width: 90vw;
+  height: 5vh;
+  margin-bottom: 2vh;
+  color: rgb(104, 104, 104);
+}
+
+.inputDiv2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  width: 100vw;
+  top: 65%;
+  height: 26vh;
+  z-index: 1;
+}
+
+#taskDiv2 {
+  position: absolute;
+  top: 15%;
+  background-color: white;
+  height: 45vh;
+  width: 100vw;
+  padding-top: 0.4vh;
+  overflow-y: auto;
 }

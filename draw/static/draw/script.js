@@ -20,6 +20,18 @@
     }
   })
 
+  $("#Name2").focus(function() {
+    $(this).val("");
+    $(this).css("color", "black")
+  })
+
+  $("#Name2").focusout(function() {
+    if ($(this).val() == "") {
+      $(this).val("Enter task...")
+      $(this).css("color", "rgb(104, 104, 104)")
+    }
+  })
+
   $("#Add").click(function() {
     var name = $("#Name").val()
     var date = $("#Date").val()
@@ -31,18 +43,33 @@
         $(('<div>')).html(`<label for="${name}" id="taskName">${name}</label><label for="${date}">Deadline: ${date}</label>`).addClass("taskItem"),
         $(('<div>')).html(`<input type="checkbox" value="${name};${date};${task}">`).addClass("taskCheck")
       )
+      tDiv.addClass("animate__animated animate__fadeIn animate__fast")
       $('#taskDiv').append(tDiv);
+    }
+  })
+
+  $("#Add2").click(function() {
+    var name = $("#Name2").val()
+    var date = $("#Date2").val()
+    var task = $("#Task2").val()
+
+    if (name && date) {
+      var tDiv = $(('<div>')).addClass("taskBar");
+      tDiv.append(
+        $(('<div>')).html(`<label for="${name}" id="taskName">${name}</label><label for="${date}">Deadline: ${date}</label>`).addClass("taskItem"),
+        $(('<div>')).html(`<input type="checkbox" value="${name};${date};${task}">`).addClass("taskCheck")
+      )
+      tDiv.addClass("animate__animated animate__fadeIn animate__fast")
+      $('#taskDiv2').append(tDiv);
     }
   })
 
   $("#Remove").click(function() {
     var checkboxes = $(":checkbox")
-    var selectedTasks = [];
     for (var i = 0; i < checkboxes.length; i++) {
       var item = checkboxes[i];
       if (item.checked) {
         item.parentNode.parentNode.parentNode.removeChild(item.parentNode.parentNode);
-
       }
     }
   })
@@ -79,9 +106,9 @@
     $('#designTasks').html("");
     $('#deployTasks').html("");
     $('#reviewTasks').html("");
-    Object.keys(listDataBase).forEach(function(key){
+    Object.keys(listDataBase).forEach(function(key) {
       listDataBase[key].forEach(task => {
-        $(task.kind).append($(('<div>')).html(`${task.name}<br>Deadline:<br>${task.date}<br>Posted by:${usernames[task.uid]}`).addClass("bigScreenTasks"));
+        $(task.kind).append($(('<div>')).html(`${task.name}<br>Deadline:<br>${task.date}<br>Posted by:${usernames[task.uid]}`).addClass("bigScreenTasks animate__animated animate__fadeIn animate__fast"));
       })
     })
     // received.task.forEach(task => {  

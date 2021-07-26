@@ -1,5 +1,7 @@
-body {
+body, html {
+  height: 100%;
   background-color: #cabbda;
+  position: relative;
 }
 
 .mobileTitle {
@@ -70,15 +72,6 @@ label {
   right: 5vw;
   display: flex;
   align-self: center;
-}
-
-.btnDiv {
-  display: flex;
-  justify-content: center;;
-  position: absolute;
-  width: 100vw;
-  height: 10vh;
-  bottom: 0%;
 }
 
 #Name {
@@ -160,4 +153,19 @@ input[type=checkbox] {
   width: 100vw;
   padding-top: 0.4vh;
   overflow-y: auto;
+}
+
+#todolist {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.btnDiv {
+  display: flex;
+  justify-content: center;;
+  position: absolute;
+  width: 100vw;
+  height: 10vh;
+  bottom: 0%;
 }
